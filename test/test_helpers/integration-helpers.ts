@@ -13,9 +13,13 @@ import {
 } from 'vscode-languageserver-protocol/node';
 
 export function startServer() {
-  return spawn('node_modules/.bin/nyc', ['--reporter', 'none', 'node', './inst/start-server.js', '--stdio', '--no-clean'], {
+  const process = spawn('node_modules/.bin/nyc', ['--reporter', 'none', 'node', './inst/start-server.js', '--stdio', '--no-clean'], {
     cwd: path.join(__dirname, '../..'),
   });
+
+  process.stderr.on('data', (data) => console.error(data));
+
+  return process;
 }
 
 export type UnknownResult = Record<string, unknown>;
