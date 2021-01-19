@@ -262,9 +262,9 @@ export default class ProjectRoots {
         registry: this.server.getRegistry(project.root),
       };
     } catch (e) {
-      // logError(e);
+      logError(e);
 
-      return e.toString();
+      return false;
     }
   }
 
