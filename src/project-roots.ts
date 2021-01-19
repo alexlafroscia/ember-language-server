@@ -233,12 +233,15 @@ export default class ProjectRoots {
 
   async initialize(workspaceRoot: string) {
     this.workspaceRoot = workspaceRoot;
-
+    console.log('projectRoots:initialize', workspaceRoot);
     this.findProjectsInsideRoot(this.workspaceRoot);
   }
 
   onProjectAdd(rawPath: string) {
+    console.log('onProjectAdd', rawPath);
     const projectPath = path.resolve(URI.parse(rawPath).fsPath);
+
+    console.log('projectPath', projectPath);
 
     if (this.projects.has(projectPath)) {
       return false;
@@ -261,7 +264,9 @@ export default class ProjectRoots {
     } catch (e) {
       logError(e);
 
-      return false;
+      return {
+        e: e.toString(),
+      };
     }
   }
 
