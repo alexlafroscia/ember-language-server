@@ -22,8 +22,8 @@ export default class DefinitionProvider {
     if (!project) {
       return {
         uri,
-        projects: this.server.projectRoots.projects,
-      };
+        projects: this.server.projectRoots.projects as any,
+      } as any;
     }
 
     try {
