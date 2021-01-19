@@ -20,7 +20,10 @@ export default class DefinitionProvider {
     const project = this.server.projectRoots.projectForUri(uri);
 
     if (!project) {
-      return null;
+      return {
+        uri,
+        projects: this.server.projectRoots.projects,
+      };
     }
 
     try {
