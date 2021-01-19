@@ -75,11 +75,17 @@ export async function getResult(reqType, connection: MessageConnection, files, f
   const params = textDocument(modelPath, position);
 
   openFile(connection, modelPath);
-  const response = await connection.sendRequest(reqType, params);
+  const response: any = await connection.sendRequest(reqType, params);
 
   await destroy();
 
-  return { response: normalizeUri(response, normalizedPath), registry: normalizeRegistry(normalizedPath, result.registry as Registry) };
+  return {
+    response: normalizeUri(response, normalizedPath),
+    root: response.root,
+    projectPath: response.projectPath,
+    initIssues: response.initIssues,
+    registry: normalizeRegistry(normalizedPath, result.registry as Registry),
+  };
 }
 
 export function openFile(connection: MessageConnection, filePath: string) {
