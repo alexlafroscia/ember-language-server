@@ -252,6 +252,8 @@ export default class ProjectRoots {
       project.init(this.server);
 
       return {
+        root: project.root,
+        projectPath: projectPath,
         initIssues: project.initIssues,
         providers: project.providers,
         registry: this.server.getRegistry(project.root),
